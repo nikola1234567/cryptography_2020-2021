@@ -1,29 +1,23 @@
 import algorithm.SubstitutionCryptography;
+import rabbit.Rabbit;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.util.BitSet;
 
 public class LabMainApp {
     public static void main(String[] args) throws IOException {
-        SubstitutionCryptography substitutionCryptography = new SubstitutionCryptography();
-//        substitutionCryptography.encryptText("C:\\Users\\DELL\\Desktop\\nikola\\crypto_lab1\\src\\files\\textNotCrypted.txt",
-//                "C:\\Users\\DELL\\Desktop\\nikola\\crypto_lab1\\src\\files\\textCrypted.txt");
+        String toHex = "CFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCF";
+        BigInteger key = new BigInteger(toHex, 16);
+        Rabbit r = new Rabbit(key);
 
-        substitutionCryptography.generateFrequencies("C:\\Users\\DELL\\Desktop\\nikola\\crypto_lab1\\src\\files\\crypted.txt",
-                "C:\\Users\\DELL\\Desktop\\nikola\\crypto_lab1\\src\\files\\frequencies.txt");
+        String ivHex = "0000000000000000";
+        BigInteger iv = new BigInteger(ivHex, 16);
+        r.setupIV(iv);
 
-//        substitutionCryptography.resultOfReplacing(new String[]{"ј"}, new String[]{"а"},"C:\\Users\\DELL\\Desktop\\nikola\\crypto_lab1\\src\\files\\crypted.txt");
-
-//        substitutionCryptography.resultOfReplacing(
-//                new String[]{"ј","у","и","ќ","р","х","д"},
-//                new String[]{"а","и","е","н","т","о","к"},
-//                "C:\\Users\\DELL\\Desktop\\nikola\\crypto_lab1\\src\\files\\crypted.txt");
-
-        substitutionCryptography.resultOfReplacing(
-                new String[]{"ј","ќ","у", "и","х", "к","ф", "т", "р", "м", "љ", "н", "д","њ", "ѓ", "г", "ѕ","а", "џ","в", "п", "с", "ц", "ш","з", "в","о", "ж"},
-                new String[]{"а","н","и", "е","о", "т", "м", "с", "в", "д", "к", "ј", "р", "л", "п", "ч", "з", "ф", "ц","у", "ш", "г", "ж", "њ","ѓ", "у","б", "х"},
-                "C:\\Users\\DELL\\Desktop\\nikola\\crypto_lab1\\src\\files\\crypted.txt");
-//        substitutionCryptography.resultOfReplacing(new String[]{"ј","у","и"}, new String[]{"а","е","о"},"C:\\Users\\DELL\\Desktop\\nikola\\crypto_lab1\\src\\files\\crypted.txt");
-
-
+        String message = "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+        System.out.println(message.length());
+        BigInteger msg1 = new BigInteger(message, 2);
+        r.encryptText(msg1, 128);
     }
 }
