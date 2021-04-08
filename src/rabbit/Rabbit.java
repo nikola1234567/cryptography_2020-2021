@@ -106,30 +106,21 @@ public class Rabbit {
             cOld[i] = state.cCounterVariable[i];
         }
 
-        state.cCounterVariable[0] =
-                HelperUtils.shrinkTo32Bits(state.cCounterVariable[0] + 0x4D34D34D + state.fCarryBit);
-        state.cCounterVariable[1] =
-                HelperUtils.shrinkTo32Bits(state.cCounterVariable[1] + 0xD34D34D3 + (state.cCounterVariable[0] < cOld[0] ? 1 : 0));
-        state.cCounterVariable[2] =
-                HelperUtils.shrinkTo32Bits(state.cCounterVariable[2] + 0x34D34D34 + (state.cCounterVariable[1] < cOld[1] ? 1 : 0));
-        state.cCounterVariable[3] =
-                HelperUtils.shrinkTo32Bits(state.cCounterVariable[3] + 0x4D34D34D + (state.cCounterVariable[2] < cOld[2] ? 1 : 0));
-        state.cCounterVariable[4] =
-                HelperUtils.shrinkTo32Bits(state.cCounterVariable[4] + 0xD34D34D3 + (state.cCounterVariable[3] < cOld[3] ? 1 : 0));
-        state.cCounterVariable[5] =
-                HelperUtils.shrinkTo32Bits(state.cCounterVariable[5] + 0x34D34D34 + (state.cCounterVariable[4] < cOld[4] ? 1 : 0));
-        state.cCounterVariable[6] =
-                HelperUtils.shrinkTo32Bits(state.cCounterVariable[6] + 0x4D34D34D + (state.cCounterVariable[5] < cOld[5] ? 1 : 0));
-        state.cCounterVariable[7] =
-                HelperUtils.shrinkTo32Bits(state.cCounterVariable[7] + 0xD34D34D3 + (state.cCounterVariable[6] < cOld[6] ? 1 : 0));
+        state.cCounterVariable[0] = HelperUtils.shrinkTo32Bits(state.cCounterVariable[0] + 0x4D34D34D + state.fCarryBit);
+        state.cCounterVariable[1] = HelperUtils.shrinkTo32Bits(state.cCounterVariable[1] + 0xD34D34D3 + (state.cCounterVariable[0] < cOld[0] ? 1 : 0));
+        state.cCounterVariable[2] = HelperUtils.shrinkTo32Bits(state.cCounterVariable[2] + 0x34D34D34 + (state.cCounterVariable[1] < cOld[1] ? 1 : 0));
+        state.cCounterVariable[3] = HelperUtils.shrinkTo32Bits(state.cCounterVariable[3] + 0x4D34D34D + (state.cCounterVariable[2] < cOld[2] ? 1 : 0));
+        state.cCounterVariable[4] = HelperUtils.shrinkTo32Bits(state.cCounterVariable[4] + 0xD34D34D3 + (state.cCounterVariable[3] < cOld[3] ? 1 : 0));
+        state.cCounterVariable[5] = HelperUtils.shrinkTo32Bits(state.cCounterVariable[5] + 0x34D34D34 + (state.cCounterVariable[4] < cOld[4] ? 1 : 0));
+        state.cCounterVariable[6] = HelperUtils.shrinkTo32Bits(state.cCounterVariable[6] + 0x4D34D34D + (state.cCounterVariable[5] < cOld[5] ? 1 : 0));
+        state.cCounterVariable[7] = HelperUtils.shrinkTo32Bits(state.cCounterVariable[7] + 0xD34D34D3 + (state.cCounterVariable[6] < cOld[6] ? 1 : 0));
         state.fCarryBit = (state.cCounterVariable[7] < cOld[7] ? 1l : 0l);
 
         for (int i = 0; i < 8 ; i++) {
             g[i] = this.applyGFunction(HelperUtils.shrinkTo32Bits(state.xStateVariable[i] + state.cCounterVariable[i]));
         }
 
-        state.xStateVariable[0] =
-                HelperUtils.shrinkTo32Bits(g[0] + Long.rotateLeft(g[7],16) + Long.rotateLeft(g[6], 16));
+        state.xStateVariable[0] = HelperUtils.shrinkTo32Bits(g[0] + Long.rotateLeft(g[7],16) + Long.rotateLeft(g[6], 16));
         state.xStateVariable[1] = HelperUtils.shrinkTo32Bits(g[1] + Long.rotateLeft(g[0], 8) + g[7]);
         state.xStateVariable[2] = HelperUtils.shrinkTo32Bits(g[2] + Long.rotateLeft(g[1],16) + Long.rotateLeft(g[0], 16));
         state.xStateVariable[3] = HelperUtils.shrinkTo32Bits(g[3] + Long.rotateLeft(g[2], 8) + g[1]);
