@@ -1,9 +1,11 @@
 package rabbit;
 
+import java.math.BigInteger;
+
 public class RabbitInternalState {
-    Long[] xStateVariable = new Long[8];
-    Long[] cCounterVariable = new Long[8];
-    Long fCarryBit;
+    BigInteger[] xStateVariable = new BigInteger[8];
+    BigInteger[] cCounterVariable = new BigInteger[8];
+    BigInteger fCarryBit;
 
     public RabbitInternalState() {}
 }

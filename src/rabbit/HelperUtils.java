@@ -24,27 +24,11 @@ public class HelperUtils {
     * param: p - od koja pozicija da ja zeme podnizata
     * returns: BigInteger - podnizata od bitovi kako cel broj
     * */
-    public static BigInteger messageBlockExtraction(BigInteger number, int k, int p) {
+    public static BigInteger bitExtracted(BigInteger number, int k, int p) {
         BigInteger mask =  BigInteger.valueOf(1l).shiftLeft(k).subtract(BigInteger.valueOf(1l));
         BigInteger pair = number.shiftRight(p);
         BigInteger value = pair.and(mask);
         return value;
-    }
-
-    /*
-     * param: number - brojot od koj sakame da izvleceme podniza od bitovi
-     * param: k - kolkava podniza od bitovi
-     * param: p - od koja pozicija da ja zeme podnizata
-     * returns: int - podnizata od bitovi kako cel broj
-     *
-     * +: razlika megju ovaa i gornata funkcija e sto ovaa vrakja podniza do maks 32 bita, zoso ja vrakja
-     *    kako int, a gornata vrakja BigInteger, a so toa i pogolema niza od bitovi
-     * */
-    public static int bitExtracted(BigInteger number, int k, int p) {
-        BigInteger mask = BigInteger.valueOf((1 << k) - 1);
-        BigInteger pair = number.shiftRight(p);
-        BigInteger value = pair.and(mask);
-        return value.intValueExact();
     }
 
     /*
@@ -113,9 +97,9 @@ public class HelperUtils {
 
     /*
     * param: l - broj
-    * returns: long - brojot dobien na vlez ako e povekje od 32 biti se doveduva na <= 32 biti
+    * returns: BigInteger - brojot dobien na vlez ako e povekje od 32 biti se doveduva na <= 32 biti
     * */
-    public static long shrinkTo32Bits(long l) {
-        return BigInteger.valueOf(l).mod(BigInteger.valueOf(HelperUtils.power(2, 32))).longValueExact();
+    public static BigInteger shrinkTo32Bits(BigInteger l) {
+        return l.mod(BigInteger.valueOf(HelperUtils.power(2, 32)));
     }
 }

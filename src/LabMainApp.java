@@ -7,7 +7,7 @@ import java.util.BitSet;
 
 public class LabMainApp {
     public static void main(String[] args) throws IOException {
-        String toHex = "CFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCF";
+        String toHex = "1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B1B";
         BigInteger key = new BigInteger(toHex, 16);
         Rabbit r = new Rabbit(key);
 
